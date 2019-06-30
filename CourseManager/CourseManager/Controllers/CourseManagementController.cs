@@ -6,12 +6,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CourseManager.Models;
+using CourseManager.Filters;
 
 namespace CourseManager.Controllers
 {
+    [RequireAuthentication]
+    [ActionResultExceptionFilter]
     public class CourseManagementController : Controller
     {
-        private CourseManageEntities db = new CourseManageEntities();
+        private CourseManagerEntities db = new CourseManagerEntities();
 
         //
         // GET: /CourseManagement/
@@ -39,12 +42,9 @@ namespace CourseManager.Controllers
 
         public ActionResult Create()
         {
-            var Classes = db.Classes.ToList();
-            ViewBag.classes = Classes;
-            var Teachers = db.Teachers.ToList();
-            ViewBag.teacher = Teachers;
-            var Course = db.Course.ToList();
-            ViewBag.course= Course;
+            ViewBag.teachers = db.Teachers.ToList();
+            ViewBag.class_ = db.Classes.ToList();
+            ViewBag.courses = db.Courses.ToList();
             return View();
         }
 
@@ -69,6 +69,9 @@ namespace CourseManager.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            ViewBag.teachers = db.Teachers.ToList();
+            ViewBag.class_ = db.Classes.ToList();
+            ViewBag.courses = db.Courses.ToList();
             CourseManagements coursemanagements = db.CourseManagements.Find(id);
             if (coursemanagements == null)
             {

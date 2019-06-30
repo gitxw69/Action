@@ -1,20 +1,42 @@
 ﻿<!DOCTYPE html>
 <html lang="zh">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .sidebar {
+            padding-top:30px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+        .sidebar li a {
+            color:#333;
+        }
+    </style>
+</head>
     <body>
-        @Html .Partial("Navbar")
+        <header>
+            @Html.Action("Navbar", "Home")
+        </header>
+        <div class="container body-content">
+            <div class="col-md-3 float-left">
+                @Html.Action("SideBar", "Home")
+            </div>
+            <div class="col-md-9 float-right">
+                @RenderSection("featured", required: false)
+                @RenderBody()
+            </div>
+
+        </div>
+        <br />
         <footer>
             <div class="content-wrapper">
-                @RenderBody()
-                <hr/>
                 <div class="float-left">
                     <p>&copy; @DateTime.Now.Year - 我的 ASP.NET MVC 应用程序</p>
                 </div>
@@ -22,7 +44,6 @@
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
     </body>
 </html>

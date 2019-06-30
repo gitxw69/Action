@@ -11,12 +11,21 @@ namespace CourseManager.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class CourseManagements
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "班级")]
         public int ClassId { get; set; }
-        public int Courseid { get; set; }
-        public int Teacherid { get; set; }
+        [Required]
+        [Display(Name = "课程")]
+        public int CourseId { get; set; }
+        [Required]
+        [Display(Name = "班主任")]
+        public int TeacherId { get; set; }
     }
 }

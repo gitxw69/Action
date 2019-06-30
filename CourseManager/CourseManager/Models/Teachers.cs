@@ -18,8 +18,9 @@ namespace CourseManager.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        public string Name { get; set; }
+        [Required]
         [StringLength(20)]
-        public Nullable<int> TeacherId { get; set; }
+        [Display(Name="姓名")]
+        public string Name { get; set; }
     }
 }

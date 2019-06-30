@@ -1,10 +1,10 @@
 ﻿@model CourseManager.Models.CourseManagements
-@using CourseManager.Models
+
 @{
     ViewBag.Title = "Create";
-    var classes = (List<Classes>)ViewBag.Classes;
-    var teachers = (List<Teachers>)ViewBag.teachers;
-    var courses = (List<Course>)ViewBag.course;
+    var class_ = (List<CourseManager.Models.Classes>)ViewBag.Class_;
+    var teachers = (List<CourseManager.Models.Teachers>)ViewBag.Teachers;
+    var courses = (List<CourseManager.Models.Courses>)ViewBag.Courses;
 }
 
 <h2>Create</h2>
@@ -12,48 +12,51 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>CourseManagements</legend>
+    <div class="form-horizontal">
+        <h4>CourseManagements</h4>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ClassId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClassName, htmlAttributes: new { @class = "control-lable col-md-2"})
+            <div class="col-md-10">
+                <select name="ClassId" class="form-control">
+                    @foreach (var temp in class_)
+                    { 
+                        <option value="@temp.Id">@temp.Name</option>
+                    }
+                </select>
+            </div>
         </div>
-        <div class="editor-field">
-            <select name="ClassId" class="form-control">
-                @foreach (var cls in classes)
-                {
-                  <option value="@cls.Id">@cls.Name</option>
-                }
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-lable col-md-2"})
+            <div class="col-md-10">
+            <select name="CourseId" class="form-control">
+                @foreach (var temp in courses)
+                { 
+                    <option value="@temp.Id">@temp.Name</option>
+                }
             </select>
+            </div>
+        </div>
+                
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeacherName, htmlAttributes: new { @class = "control-lable col-md-2"})
+            <div class="col-md-10">
+                <select name="TeacherId" class="form-control">
+                    @foreach (var temp in teachers)
+                    { 
+                        <option value="@temp.Id">@temp.Name</option>
+                    }
+                </select>
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Courseid)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create"  class="btn btn-default"/>
+            </div>
         </div>
-        <div class="editor-field">
-            <select name="Coursesid" class="form-control">
-                @foreach (var Course in courses)
-                {
-                  <option value="@Course.Id">@Course.Name</option>
-                }
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Teacherid)
-        </div>
-        <div class="editor-field">
-             <select name="Teacherid" class="form-control">
-                @foreach (var teacher in teachers)
-                {
-                  <option value="@teacher.Id">@teacher.Name</option>
-                }
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </div>
 }
 
 <div>
